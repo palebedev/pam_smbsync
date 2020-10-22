@@ -39,7 +39,7 @@ int pam_sm_chauthtok(pam_handle_t* pamh,int flags,int argc,const char* argv[])
         return PAM_USER_UNKNOWN;
     }
     const char* old_password = "";
-    // We need the old password only if we're not invoced as root.
+    // We need the old password only if we're not invoked as root.
     if(id){
         ret = pam_get_authtok(pamh,PAM_OLDAUTHTOK,&old_password,NULL);
         if(ret!=PAM_SUCCESS){
@@ -92,8 +92,8 @@ int pam_sm_chauthtok(pam_handle_t* pamh,int flags,int argc,const char* argv[])
                 // unprivileged mode that talks to samba server.
                 execlp("smbpasswd","smbpasswd","-s","-u",user,NULL);
             }else
-                // User name as last parameter invoces root mode that
-                // directly modives the database without the need for
+                // User name as last parameter invokes root mode that
+                // directly modifies the database without the need for
                 // the old password.
                 execlp("smbpasswd","smbpasswd","-s",user,NULL);
             pam_syslog(pamh,LOG_ERR,"execlp: %s",strerror(e=errno));
